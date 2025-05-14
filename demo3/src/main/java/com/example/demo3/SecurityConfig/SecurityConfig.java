@@ -32,14 +32,25 @@ public class SecurityConfig {
     public AuthenticationManager authManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/register", "/login","/verify","/resend-verification").permitAll()
-                        .requestMatchers("/admin/**").hasAnyRole("ADMIN","USER")
-                        //.requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers(
+                                "/register",
+                                "/login",
+                                "/verify",
+                                "/resend-verification",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/swagger-ui.html",
+                                "/v3/api-docs",
+                                "/v3/api-docs/swagger-config"
+                        ).permitAll()
+                        .requestMatchers("/admin/**").hasAnyRole("ADMIN", "USER")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -48,9 +59,8 @@ public class SecurityConfig {
     }
 
 
-    public userDetailsService userDetailsService() {
-        return userDetailsService;
-    }
+
+
 
 }
 
