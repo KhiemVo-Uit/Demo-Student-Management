@@ -63,6 +63,14 @@ public class StudentService {
 
         return studentRepository.save(student);
     }
+
+
+    public void deleteStudent(Long id) {
+        Student student = studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
+        studentRepository.delete(student);
+    }
+
 }
 
 

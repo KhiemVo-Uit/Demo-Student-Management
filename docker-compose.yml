@@ -1,19 +1,20 @@
-version: "3.8"
 services:
   mysql:
     image: mysql:8
     container_name: mysql
     environment:
-      MYSQL_ROOT_PASSWORD:
+      MYSQL_ROOT_PASSWORD: khiem
       MYSQL_DATABASE: demo3
     ports:
-      - "3307:3307"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+    restart: unless-stopped
 
   backend:
     build:
       context: ./backend
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     volumes:
@@ -22,9 +23,11 @@ services:
     depends_on:
       - mysql
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3307/demo3
+      SPRING_DEVTOOLS_REMOTE_SECRET: "debug"
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/demo3
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: 
+      SPRING_DATASOURCE_PASSWORD: khiem
+    restart: unless-stopped
 
   frontend:
     build:
@@ -35,6 +38,8 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
+    command: npm start
+    restart: unless-stopped
 
 volumes:
   mysql_data:

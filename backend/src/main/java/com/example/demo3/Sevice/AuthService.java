@@ -8,9 +8,9 @@ import org.springframework.security.core.Authentication;
 public class AuthService {
 
     private final AuthenticationManager authenticationManager;
-    private final com.example.demo3.Service.JwtUtil jwtUtils;
+    private final com.example.demo3.Sevice.JwtUtil jwtUtils;
 
-    public AuthService(AuthenticationManager authenticationManager, com.example.demo3.Service.JwtUtil jwtUtils) {
+    public AuthService(AuthenticationManager authenticationManager, com.example.demo3.Sevice.JwtUtil jwtUtils) {
         this.authenticationManager = authenticationManager;
         this.jwtUtils = jwtUtils;
     }

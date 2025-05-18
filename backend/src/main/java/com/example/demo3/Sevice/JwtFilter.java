@@ -21,12 +21,12 @@ import java.util.List;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
-    private final com.example.demo3.Service.JwtUtil jwtUtil;
+    private final com.example.demo3.Sevice.JwtUtil jwtUtil;
 
     private final UserDetailsService userDetailsService;
 
     @Autowired
-    public JwtFilter(com.example.demo3.Service.JwtUtil jwtUtil, @Lazy UserDetailsService userDetailsService) {
+    public JwtFilter(com.example.demo3.Sevice.JwtUtil jwtUtil, @Lazy UserDetailsService userDetailsService) {
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
     }

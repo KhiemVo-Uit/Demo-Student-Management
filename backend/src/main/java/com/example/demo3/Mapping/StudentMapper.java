@@ -3,27 +3,47 @@ package com.example.demo3.Mapping;
 import com.example.demo3.DTO.StudentDTO.StudentDTO;
 import com.example.demo3.Entity.Student;
 import com.example.demo3.Entity.User;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
+import org.springframework.stereotype.Component;
 
-@Mapper(componentModel = "spring")
-public interface StudentMapper {
+@Component
+public class StudentMapper {
 
-    @Mapping(target = "user", source = "userId", qualifiedByName = "userIdToUser")
-    Student toEntity(StudentDTO dto);
-
-    @Mapping(source = "user.id", target = "userId")
-    @Mapping(source = "user.username", target = "username")
-    StudentDTO toDTO(Student student);
-
-    @Named("userIdToUser")
-    default User userIdToUser(Long userId) {
-        if (userId == null) {
+    public Student toEntity(StudentDTO dto) {
+        if (dto == null) {
             return null;
         }
-        User user = new User();
-        user.setId(userId);
-        return user;
+
+        Student student = new Student();
+        student.setId(dto.getId());
+        student.setFullName(dto.getFullName());
+        student.setEmail(dto.getEmail());
+
+        if (dto.getUserId() != null) {
+            User user = new User();
+            user.setId(dto.getUserId());
+            student.setUser(user);
+        } else {
+            student.setUser(null);
+        }
+
+        return student;
+    }
+
+    public StudentDTO toDTO(Student student) {
+        if (student == null) {
+            return null;
+        }
+
+        StudentDTO dto = new StudentDTO();
+        dto.setId(student.getId());
+        dto.setFullName(student.getFullName());
+
+        if (student.getUser() != null) {
+            dto.setUserId(student.getUser().getId());
+        } else {
+            dto.setUserId(null);
+        }
+
+        return dto;
     }
 }

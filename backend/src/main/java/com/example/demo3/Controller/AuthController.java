@@ -43,11 +43,11 @@ public class AuthController {
 //    private JwtUtil jwtUtil;
 
     private final AuthenticationManager authenticationManager;
-    private final com.example.demo3.Service.JwtUtil jwtUtil;
+    private final com.example.demo3.Sevice.JwtUtil jwtUtil;
     private final UserDetailsService userDetailsService;
 
     public AuthController(AuthenticationManager authenticationManager,
-                          com.example.demo3.Service.JwtUtil jwtUtil,
+                          com.example.demo3.Sevice.JwtUtil jwtUtil,
                            UserDetailsService userDetailsService) {
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;

@@ -1,4 +1,4 @@
-package com.example.demo3.Service;
+package com.example.demo3.Sevice;
 
 import com.example.demo3.DTO.UserDTO.AuthResponse;
 import com.example.demo3.DTO.UserDTO.LoginDTO;
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepo;
 
     @Autowired
-    private com.example.demo3.Service.JwtUtil jwtUtil;
+    private com.example.demo3.Sevice.JwtUtil jwtUtil;
 
     @Autowired
     private UserMapper userMapper;

@@ -56,4 +56,11 @@ public class StudentController {
         return ResponseEntity.ok(studentDTOs);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
+        studentService.deleteStudent(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
